@@ -1,5 +1,8 @@
 module Memento
   class State < ActiveRecord::Base
+    include Replicable
+    include Orderable
+
     self.table_name = "memento_states"
 
     belongs_to :session, :class_name => "Memento::Session"

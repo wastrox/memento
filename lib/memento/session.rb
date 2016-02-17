@@ -1,10 +1,14 @@
 module Memento
   class Session < ActiveRecord::Base
+    include Replicable
+    include Orderable
+
     self.table_name = "memento_sessions"
 
-    has_many :states, -> { order "id DESC" },
+    has_many :states, -> { order "created_at_ms DESC" },
              :class_name => "Memento::State", :dependent => :delete_all
     belongs_to :user
+    has_one :action, :class_name => "Memento::ActionRecord", :dependent => :delete
 
     # attr_accessible nil
 

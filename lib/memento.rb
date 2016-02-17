@@ -1,4 +1,5 @@
 require 'active_record'
+require 'active_support' # we need active_support to use concerns for stay DRY when generating UUIDs by moving uuid code to concerns
 
 module Memento
 
@@ -53,6 +54,14 @@ module Memento
       @serializer ||= YAML
     end
 
+    def action_record
+      Thread.current[:action_record]
+    end
+
+    def action_record=(action_record)
+      Thread.current[:action_record] = action_record
+    end
+
     private
 
     def session
@@ -77,9 +86,12 @@ def Memento(user_or_id, &block)
   Memento.watch(user_or_id, &block)
 end
 
+require 'memento/concerns/replicable'
+require 'memento/concerns/orderable'
 require 'memento/railtie'
 require 'memento/result'
 require 'memento/action'
+require 'memento/action_record'
 require 'memento/active_record_methods'
 require 'memento/action_controller_methods'
 require 'memento/state'
