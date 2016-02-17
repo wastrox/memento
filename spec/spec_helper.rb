@@ -4,7 +4,6 @@ require 'active_record'
 require 'action_controller'
 require 'rspec'
 
-I18n.enforce_available_locales = false
 
 # Initialize time_zones from rails
 Time.zone = "Berlin"
@@ -18,6 +17,12 @@ require 'memento'
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 # catch AR schema statements
 $stdout = StringIO.new
+
+RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+end
 
 def setup_db
   ActiveRecord::Schema.define(:version => 1) do
