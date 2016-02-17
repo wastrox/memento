@@ -1,10 +1,12 @@
 = memento
 
-RubyGem/Plugin for undo in Rails/ActiveRecord - covers destroy, update and create actions.
+RubyGem/Plugin for undo in Rails/ActiveRecord - covers destroy, update and create actions, traceable customizable history of actions.
+
+This version uses UUIDs instead of integer ids for replication purposes.
 
 == Install
 
-memento will only work with Rails 3.0 and Ruby 1.9.2.
+memento will work with Rails 3.0+ and Ruby 1.9.2+. Tested with Rails 4.1 and Ruby 2.1.2
 
 == as a ruby-gem
 
@@ -82,4 +84,4 @@ Undoing this changes is as simple as calling #undo on an memento-session-instanc
   Memento::Session.first.undo
 
 
-Copyright (c) 2009-2010 Yolk Sebastian Munz & Julia Soergel GbR. See LICENSE for details.
+Copyright (c) 2009-2010 Yolk Sebastian Munz & Julia Soergel GbR. See LICENSE for details. UUID improvements by Alexander Kosachov
