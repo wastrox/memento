@@ -4,7 +4,6 @@ module Memento
     include Orderable
 
     self.table_name = "memento_states"
-    default_scope { order('created_at_ms ASC') }
 
     belongs_to :session, :class_name => "Memento::Session"
     belongs_to :record, :polymorphic => true

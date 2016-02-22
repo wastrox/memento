@@ -4,9 +4,10 @@ module Memento
     include Orderable
 
     self.table_name = "memento_sessions"
-    default_scope { order('created_at_ms ASC') }
+    default_scope { order('created_at_ms') } 
 
-    has_many :states, -> { order "created_at_ms DESC" },
+
+    has_many :states, -> { order(created_at_ms: :desc) },
              :class_name => "Memento::State", :dependent => :delete_all
     belongs_to :user
     has_one :action, :class_name => "Memento::ActionRecord", :dependent => :delete
